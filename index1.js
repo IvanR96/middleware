@@ -7,18 +7,19 @@ import morgan from "morgan";
 
 const app = express();
 const port = 3000;
-app.use(morgan("combined"));
 
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.post("/submit", (req, res) =>{
-  console.log(req.body);
-})
-
-app.get("/", (req, res) => {
+app.get("/", (req, res) =>{
   res.sendFile(__dirname + "/index.html");
 });
 
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
+app.post("/", (req,res) =>{
+  let street = req.body.street;
+  let pet = req.body.pet;
+
+  console.log(`The street name is ${street} and the pet name is ${pet}!`);
+});
+app.listen(port, () =>{
+  console.log(`Server running on port ${port}`);
 });
